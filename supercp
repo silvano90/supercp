@@ -1,0 +1,14 @@
+#!/bin/bash
+SECONDS=0
+a=`ls -lh $1 | cut -f 5 -d " "`
+cp $1 $2 &
+while [ 1 ] 
+do
+b=`ls -lh $2 | cut -f 5 -d " "`
+echo -ne $a "/" $b" elapsed time " $SECONDS " s" \\r
+if [ $a == $b ]
+then
+echo finished
+break
+fi
+done
