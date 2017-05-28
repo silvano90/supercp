@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SECONDS=0
+a=`ls -lh $1 | cut -f 5 -d " "`
+a1=`ls -l $1 | cut -f 5 -d " "`
+touch $2
+cp $1 $2 &
+while [ 1 ] 
+do
+b=`ls -lh $2 | cut -f 5 -d " "`
+b1=`ls -l $2 | cut -f 5 -d " "`
+echo -ne $b "/" $a" elapsed time " $SECONDS " s" $((100*$b1/$a1)) "%"\\r
+if [ $a == $b ]
+then
+echo finished in $SECONDS 
+break
+fi
+done
